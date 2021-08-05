@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        li {
+            list-style: none;
+        }
+        
+        body {
+            height: 100vh;
+            background: url(images/title_bg.png) center -40px no-repeat, url(images/bg.png) center center/100% 100%;
+            overflow: hidden;
+        }
+        
+        .box {
+            width: 1345px;
+            margin: 0 auto;
+            margin-top: 180px;
+            overflow: hidden;
+        }
+        
+        .box nav {
+            position: relative;
+            z-index: 10;
+        }
+        
+        .box nav ul {
+            display: flex;
+        }
+        
+        .box nav ul li {
+            background: url(images/dashijie.png) no-repeat -1px 0;
+            width: 38px;
+            height: 264px;
+            margin-right: 15px;
+            cursor: pointer;
+            /* 过渡效果 */
+            transition: transform 0.5s;
+        }
+        
+        .box nav ul li:last-child {
+            margin-right: 0;
+        }
+        
+        .box video {
+            position: absolute;
+            left: 0;
+            top: 180px;
+        }
+        
+        .box nav ul li:nth-child(1) {
+            background-position: -1px 0;
+        }
+        /* 分组选择器,多个选择器有相同样式的时候,可以把这多个选择器放在一起 */
+        
+        .box nav ul li:nth-child(1):hover,
+        .box nav ul li:nth-child(1).active {
+            background-position: -369px 0;
+            margin-top: -20px;
+            transform: translateY(20px);
+        }
+        
+        .box nav ul li:nth-child(2) {
+            background-position: -60px 0;
+        }
+        
+        .box nav ul li:nth-child(2):hover,
+        .box nav ul li:nth-child(2).active {
+            background-position: -428px 0px;
+            margin-top: -20px;
+            transform: translateY(20px);
+        }
+        
+        .box nav ul li:nth-child(3) {
+            background-position: -115px 0;
+        }
+        
+        .box nav ul li:nth-child(3):hover,
+        .box nav ul li:nth-child(3).active {
+            background-position: -483px 0;
+            margin-top: -20px;
+            transform: translateY(20px);
+        }
+        
+        .box nav ul li:nth-child(4) {
+            background-position: -170px 0;
+        }
+        
+        .box nav ul li:nth-child(4):hover,
+        .box nav ul li:nth-child(4).active {
+            background-position: -538px 0;
+            margin-top: -20px;
+            transform: translateY(20px);
+        }
+        
+        .box nav ul li:nth-child(5) {
+            background-position: -225px 0;
+        }
+        
+        .box nav ul li:nth-child(5):hover,
+        .box nav ul li:nth-child(5).active {
+            background-position: -594px 0px;
+            margin-top: -20px;
+            transform: translateY(20px);
+        }
+        
+        .box nav ul li:nth-child(6) {
+            background-position: -280px 0;
+        }
+        
+        .box nav ul li:nth-child(6):hover,
+        .box nav ul li:nth-child(6).active {
+            background-position: -649px 0px;
+            margin-top: -20px;
+            transform: translateY(20px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <!-- 导航开始 -->
+        <nav>
+            <ul>
+                <li class="active"></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+            </ul>
+        </nav>
+        <!-- 导航结束 -->
+
+        <video src="media/gfsj_zy.mp4" width="100%" autoplay muted loop></video>
+    </div>
+    <!-- <div class="wrap"></div>
+    <div class="contaner"></div> -->
+    <script src="./js/jquery.min.js"></script>
+    <script>
+        $(function() {
+            var arrVido = [
+                "media/gfsj_zy.mp4",
+                "media/gfsj_xj.mp4",
+                "media/gfsj_gy.mp4",
+                "media/gfsj_sl.mp4",
+                "media/gfsj_hh.mp4",
+                "media/gfsj_sc.mp4"
+            ];
+            //绑定鼠标事件
+            $(".box nav ul li").on("click", function() {
+                var index = $(this).index(); // 
+                goto(index);
+                num = index;
+            });
+            //改索引高亮li改变vido
+            function goto(currentIndex) {
+                $(".box nav ul li").eq(currentIndex).addClass("active").siblings("li").removeClass("active");
+                $("video").attr("src", arrVido[currentIndex]);
+            }
+            var num = 0;
+            var timer = null;
+
+            //自动轮播
+            function autoPlay() {
+                if (timer == null) {
+                    timer = setInterval(function() {
+                        num++;
+                        num %= $(".box nav ul li").length;
+                        goto(num);
+                    }, 5000);
+                }
+            }
+            autoPlay();
+            $(".box nav ul li").hover(function() {
+                window.clearInterval(timer);
+                timer = null;
+            }, function() {
+                autoPlay();
+            });
+        });
+    </script>
+
+</body>
+
+</html>
