@@ -5,7 +5,7 @@
     @click="$emit('change-current-song', item)"
   >
     <div class="left">
-      <div class="title">
+      <div class="titled">
         {{ item.name }}
         <span v-for="n in item.song.alias" :key="n">{{ n }}</span>
       </div>
@@ -28,16 +28,21 @@
         <i></i>
         <i></i>
         <i></i>
+        <i></i>
       </div>
     </div>
   </li>
   <li v-else class="songlistitem" @click="$emit('change-current-song', item)">
     <div class="num"><slot></slot></div>
+    <!-- <div class="index" v-if="index !== undefined">
+      {{ (index + 1).toString().padStart(2, 0) }}
+    </div> -->
     <div class="left">
       <div class="title">
         {{ item.name }} <span v-for="n in item.alia" :key="n">{{ n }}</span>
       </div>
       <div class="info">
+        <!-- <em v-if="item.song.exclusive"></em> -->
         <i class="artist" v-for="artist in item.ar" :key="artist.id">{{
           artist.name
         }}</i>
@@ -50,6 +55,7 @@
         class="play"
         :class="{ current: currentSongId === item.id, playing: playing }"
       >
+        <i></i>
         <i></i>
         <i></i>
         <i></i>
@@ -88,9 +94,25 @@ export default {
       color: #d43c33;
     }
   }
+  // .index {
+  //   margin: 0 10px;
+  //   color: #999;
+  // }
+  // &:nth-child(1),
+  // &:nth-child(2),
+  // &:nth-child(3) {
+  //   .index {
+  //     color: red;
+  //   }
+  // }
   .left {
     flex: 1;
-    .title {
+    .titled {
+      //   font-size: 14px;
+      // white-space: nowrap;
+      // width: 100%;
+      // overflow: hidden;
+
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 1;
@@ -132,6 +154,7 @@ export default {
           margin: 0 3px;
         }
         &:last-of-type {
+          //   background: red;
           &::after {
             content: "-";
             margin: 0 5px;
@@ -146,7 +169,6 @@ export default {
   .icon {
     width: 22px;
     height: 22px;
-
     margin-left: 15px;
     position: relative;
     display: flex;
@@ -154,8 +176,12 @@ export default {
     align-items: center;
 
     .play {
+      // position: absolute;
+      // top: 0;
+      // left: 0;
       width: 100%;
       height: 100%;
+      // background: red;
       background-image: url("https://s3.music.126.net/mobile-new/img/index_icon_2x.png");
       background-repeat: no-repeat;
       background-size: 166px auto;
@@ -168,18 +194,23 @@ export default {
       background: none;
       display: flex;
       justify-content: space-around;
+      // justify-content: space-between;
       i {
-        width: 3px;
+        width: 2px;
         height: 100%;
+        // display: inline-block;
         background: #d43c33;
         transform-origin: bottom;
-        animation: playing 0.9s linear 0s infinite alternate;
+        animation: playing 0.8s linear 0s infinite alternate;
         animation-play-state: paused;
         &:nth-child(1) {
           animation-delay: -0.6s;
         }
         &:nth-child(2) {
-          animation-delay: -0.3s;
+          animation-delay: -0.4s;
+        }
+        &:nth-child(3) {
+          animation-delay: -0.2s;
         }
       }
       &.playing {

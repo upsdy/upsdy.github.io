@@ -48,6 +48,7 @@ export default {
   flex-grow: 1;
 
   &:nth-child(3n + 2) {
+    // background: red;
     margin: 0 3px;
   }
 
@@ -55,6 +56,7 @@ export default {
     position: relative;
     top: 0;
     left: 0;
+    // background: red;
     img.bg {
       vertical-align: middle;
       width: 100%;
@@ -69,12 +71,15 @@ export default {
   }
   p {
     font-size: 13px;
+    // padding: 50px 10px;
     margin: 5px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    // line-height: 2;
   }
 }
 </style>

@@ -11,6 +11,7 @@ export default {};
   border-left: 2px solid #d43c33;
   line-height: 1;
   padding-left: 10px;
-  margin: 10px 0;
+  margin: 15px 0;
+  font-size: 17px;
 }
 </style>

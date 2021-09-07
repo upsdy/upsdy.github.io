@@ -10,7 +10,10 @@
         v-for="item in newsongs"
         :key="item.id"
         :item="item"
-        @change-current-song="$emit('change-current-song', $event)"
+        @change-current-song="
+          $emit('change-current-song', $event);
+          $emit('change-current-play-list', newsongs);
+        "
         :currentSongId="currentSongId"
         :playing="playing"
       ></SongListItem>
@@ -44,13 +47,13 @@ export default {
   },
   created: function() {
     this.axios
-      .get("http://apis.netstart.cn/music/personalized?limit=6")
+      .get("/personalized?limit=6")
       .then((res) => {
         this.personalizeds = res.data.result;
       });
 
     this.axios
-      .get("http://apis.netstart.cn/music/personalized/newsong")
+      .get("/personalized/newsong")
       .then((res) => {
         this.newsongs = res.data.result;
       });
